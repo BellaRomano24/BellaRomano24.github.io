@@ -1,0 +1,11 @@
+canvas { display:block; } /* To remove the scrollbars */
+
+.sideboard {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    
+    height: 90vh;
+    background-color:grey;
+    padding: 15 10;
+}

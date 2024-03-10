@@ -1,20 +1,21 @@
 
 var canvas, ctx;
 
-var pencilColor = "rgb(5,100,25)";
+var pencilColor = "";
 var pencilWidth = 2;
 
 function init() {
     canvas = document.getElementById('main_canvas');
     ctx = canvas.getContext("2d");
 
-    canvas.addEventListener("mousemove", (e) => draw(e), false);
-    canvas.addEventListener("mousedown", (e) => startDraw(e), false);
-    canvas.addEventListener("mouseup", (e) => stopDraw(), false);
-    canvas.addEventListener("mouseout", (e) => stopDraw(), false);
+    canvas.addEventListener("mousemove", (e) => draw(e));
+    canvas.addEventListener("mousedown", (e) => startDraw(e));
+    canvas.addEventListener("mouseup",   (e) => stopDraw());
+    canvas.addEventListener("mouseout",  (e) => stopDraw());
 
     //window.addEventListener('resize', resizeCanvas, false); //this will require the redraw() function
     resizeCanvas();
+    changeColor()
 }
 
 function resizeCanvas() {
@@ -28,14 +29,13 @@ function changeColor() {
     pencilColor = document.querySelector("#color_picker").value;
 }
 
-function erase() {
+function clearBoard() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-
 function save() {
     var link = document.createElement("a");
-    link.download = "MyDrawing.jpeg";
+    link.download = "MyDrawing.png";
     link.href = canvas.toDataURL();
     document.body.appendChild(link);
     link.click();
@@ -47,17 +47,9 @@ var flag = false;
 var prevX = currX = prevY = currY = 0;
 
 function startDraw(e) {
-    prevX = currX;
-    prevY = currY;
     currX = e.clientX - canvas.offsetLeft;
     currY = e.clientY - canvas.offsetTop;
-
     flag = true;
-
-    ctx.beginPath();
-    ctx.fillStyle = pencilcolor;
-    ctx.fillRect(currX, currY, 2, 2);
-    ctx.closePath();
 }
 
 function stopDraw() {

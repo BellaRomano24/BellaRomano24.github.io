@@ -1,11 +1,36 @@
-canvas { display:block; } /* To remove the scrollbars */
+canvas {
+    background-color: white;
+    border: 2px solid #b4b4b4;
+}
+body {
+    background-color: #c7c7c7;
+}
 
 .sideboard {
+    width: 70px;
     position: absolute;
-    right: 5px;
-    top: 5px;
+    right: 0px;
+    top: 0px;
+    text-align: center;
     
     height: 90vh;
-    background-color:grey;
-    padding: 15 10;
+    padding: 15px;
+}
+
+.sideboard .bottom {
+    bottom: 10px;
+    position: absolute;
+}
+
+input[type=button] {
+    background-color: #ffffff;
+    border: none;
+    color: #505050;
+    padding: 8px 15px;
+    margin-bottom: 4px;
+    text-align: center;
+    border-radius:4px;
+    
+    display: inline-block;
+    font-size: 16px;
 }

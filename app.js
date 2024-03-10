@@ -18,7 +18,7 @@ function init() {
 }
 
 function resizeCanvas() {
-    canvas.width = window.innerWidth * 0.9;
+    canvas.width = window.innerWidth - 120;
     canvas.height = window.innerHeight * 0.9;
 
     //redraw(); 

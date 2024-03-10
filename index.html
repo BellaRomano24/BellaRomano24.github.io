@@ -3,20 +3,23 @@
         <link rel="stylesheet" href="app.css">
     </head>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script type="text/javascript" src="app.js"></script>
-
     <body onload="init()">
         <div class="menuboard">
             <input type="button" value="save" onclick="save()">
         </div>
         
-        <canvas id="main_canvas" style="border:2px solid;"></canvas>
+        <canvas id="main_canvas"></canvas>
 
         <div class="sideboard">
             <input id="color_picker" type="color" value="#ff0000" onchange="changeColor()">
             <br>
-            <input type="button" value="clear" onclick="erase()">
+            <div class="bottom">
+                <input type="button" value="clear" onclick="erase()">
+            </div>
         </div>
     </body>
+    
+    <script src="https://unpkg.com/konva@9/konva.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
 </html>

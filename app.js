@@ -30,13 +30,10 @@ function changeColor() {
 
 function erase() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    document.getElementById("canvasimg").style.display = "none";
 }
 
 
 function save() {
-    document.getElementById("canvasimg").style.border = "2px solid";
-
     var link = document.createElement("a");
     link.download = "MyDrawing.jpeg";
     link.href = canvas.toDataURL();

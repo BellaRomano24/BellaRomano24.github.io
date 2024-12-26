@@ -10,28 +10,32 @@ import AutoImport from 'unplugin-auto-import/vite';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    vue({
-      template: { transformAssetUrls }
-    }),
-    vueDevTools(),
-    Vuetify(),
-    Components(),
-    ViteFonts({
-      google: {
-        families: [{
-          name: 'Roboto',
-          styles: 'wght@100;300;400;500;700;900',
-        }],
-      },
-    }),
-    AutoImport({
-        imports: ['vue'], // Automatically import functions from 'vue'
-    })
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    },
-  },
+    base: '/dist/',
+    // build: {
+    //     preload: false
+    // },
+    plugins: [
+        vue({
+            template: { transformAssetUrls }
+        }),
+        vueDevTools(),
+        Vuetify(),
+        Components(),
+        ViteFonts({
+            google: {
+                families: [{
+                    name: 'Roboto',
+                    styles: 'wght@100;300;400;500;700;900',
+                }]
+            }
+        }),
+        AutoImport({
+            imports: ['vue']
+        })
+    ],
+    resolve: {
+        alias: {
+            '@': fileURLToPath(new URL('./src', import.meta.url))
+        }
+    }
 })

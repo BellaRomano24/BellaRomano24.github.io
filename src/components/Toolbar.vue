@@ -4,7 +4,7 @@
         <Tool icon="mdi-brush" value="brush" disabled></Tool>
         <Tool icon="mdi-eraser" value="eraser" disabled></Tool>
         <Tool icon="mdi-shape" value="shape" disabled></Tool>
-        <Tool icon="mdi-format-text" value="text" disabled></Tool>
+        <Tool icon="mdi-format-text" value="text"></Tool>
         <v-divider></v-divider>
         <Tool icon="mdi-cursor-default-outline" value="cursor"></Tool>
     </v-navigation-drawer>

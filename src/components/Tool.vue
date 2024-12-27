@@ -4,7 +4,7 @@
         class="my-2" 
         size="small" 
         :color="active ? 'primary' : 'default'"
-        @click="useTool"
+        @click="ws.setTool(value)"
     ></v-btn>
 </template>
 
@@ -14,10 +14,5 @@ import { useWorkspaceStore } from '@/stores/workspace';
 const ws = useWorkspaceStore();
 const props = defineProps(['value']);
 
-
 const active = computed(() => props.value == ws.tool);
-
-function useTool() {
-    ws.tool = props.value;
-}
 </script>

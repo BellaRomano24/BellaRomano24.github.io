@@ -19,8 +19,6 @@ onMounted(() => {
 
 var ctx;
 function init() {
-    // canvas = document.getElementById('main_canvas');
-    // canvas = ws.canvas;
     ctx = canvas.value.getContext("2d");
 
     canvas.value.addEventListener("mousemove", (e) => draw(e));
@@ -30,7 +28,6 @@ function init() {
 
     //window.addEventListener('resize', resizeCanvas, false); //this will require the redraw() function
     resizeCanvas();
-    // changeColor()
 }
 
 //https://excalidraw.com/
@@ -40,48 +37,52 @@ function init() {
 function resizeCanvas() {
     canvas.value.width = window.innerWidth - 120;
     canvas.value.height = window.innerHeight * 0.9;
-
     //redraw(); 
 }
-
-// function changeColor() {
-//     pencilColor = document.querySelector("#color_picker").value;
-// }
 
 function clearBoard() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-var flag = false;
-var prevX = 0;
-var currX = 0;
-var prevY = 0;
-var currY = 0;
+function resizeDrawing() {
+    if (!this.imageData) return;
+
+    // Clear the canvas
+    this.context.clearRect(0, 0, canvas.value.width, canvas.value.height);
+
+    // Apply scaling transformation
+    this.context.save(); // Save the current state
+    this.context.setTransform(this.scaleFactor, 0, 0, this.scaleFactor, 0, 0); // Scale the drawing
+    this.context.putImageData(this.imageData, 0, 0); // Draw scaled image data
+    this.context.restore(); // Restore the state to remove scaling for future drawing
+
+    // Optionally: store the scaled image data back
+    this.imageData = this.context.getImageData(0, 0, this.canvasWidth, this.canvasHeight);
+}
+
+var isDrawing = false;
 
 function startDraw(e) {
-    currX = e.clientX - canvas.value.offsetLeft;
-    currY = e.clientY - canvas.value.offsetTop;
-    flag = true;
+    ctx.strokeStyle = pencil.value.color;
+    ctx.lineWidth = pencil.value.width;
+    let x = e.clientX - canvas.value.offsetLeft;
+    let y = e.clientY - canvas.value.offsetTop;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    isDrawing = true;
 }
 
 function stopDraw() {
-    flag = false;
+    ctx.closePath();
+    isDrawing = false;
 }
 
 function draw(e) {
-    if (flag) {
-        prevX = currX;
-        prevY = currY;
-        currX = e.clientX - canvas.value.offsetLeft;
-        currY = e.clientY - canvas.value.offsetTop;
-
-        ctx.beginPath();
-        ctx.moveTo(prevX, prevY);
-        ctx.lineTo(currX, currY);
-        ctx.strokeStyle = pencil.value.color;
-        ctx.lineWidth = pencil.value.width;
+    if (isDrawing) {
+        let x = e.clientX - canvas.value.offsetLeft;
+        let y = e.clientY - canvas.value.offsetTop;
+        ctx.lineTo(x, y);
         ctx.stroke();
-        ctx.closePath();
     }
 }
 </script>

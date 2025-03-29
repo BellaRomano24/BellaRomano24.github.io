@@ -3,7 +3,10 @@ import { defineStore } from 'pinia'
 export const useWorkspaceStore = defineStore('counter', {
     state: () => ({
         tool: "pencil",
-        canvas: null
+        layers: ['Layer 0'],
+        currentLayer: 0,
+        canvas: null,
+        strokes: [] //Array<Object(path, layer)
     }),
     getters: {
         //   doubleCount: (state) => state.count * 2,
@@ -28,6 +31,25 @@ export const useWorkspaceStore = defineStore('counter', {
 
             this.canvas.add(text).setActiveObject(text);
             text.enterEditing(); 
+        },
+        addLayer() {
+            this.layers.push('Layer ' + this.layers.length);
+            this.currentLayer = this.layers.length -1;
+        },
+        removeLayer(index) {
+            this.strokes.forEach(e => {
+                if(e.layer === index) {
+                    this.canvas.remove(e.path.path);
+                }
+            });
+            this.strokes = this.strokes.filter(e => e.layer != index); //remove all strokes on this layer
+            this.layers.splice(index, 1); //remove layer
+            if(this.currentLayer === index) {
+                this.currentLayer = this.layers.length - 1;
+            }
+        },
+        recordStroke(path) {
+            this.strokes.push({path, layer: this.currentLayer});
         }
     }
 });

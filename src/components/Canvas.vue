@@ -19,8 +19,8 @@ onMounted(() => {
     resizeCanvas();
     ws.canvas = new fabric.Canvas(canvasEl.value, { isDrawingMode: true });
 
-    //handle click on canvas depending on selected tool
-
+    // capture strokes when drawn
+    ws.canvas.on('path:created', (e) => ws.recordStroke(e));
 });
 
 function resizeCanvas() {

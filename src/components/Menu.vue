@@ -19,7 +19,6 @@ import { useWorkspaceStore } from '@/stores/workspace';
 const ws = useWorkspaceStore();
 
 function save() {
-    console.log("saving?");
     var link = document.createElement("a");
     link.download = "MyDrawing.png";
     link.href = ws.canvas.toDataURL();

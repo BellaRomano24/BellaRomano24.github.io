@@ -1,8 +1,8 @@
 <template>
     <v-navigation-drawer location="right" permanent>
         <v-list>
+            <Shapes v-if="ws.tool == 'shape'"></Shapes>
             
-            <Shapes v-if="ws.tool == 'shapes'"></Shapes>
             <ColorAndWidth v-else></ColorAndWidth>
 
             <v-divider></v-divider>

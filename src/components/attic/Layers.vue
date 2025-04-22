@@ -25,9 +25,9 @@
                     <v-btn icon="mdi-dots-vertical" variant="plain"></v-btn>
                 </template>
                 <v-list>
-                    <v-list-item title="Clipart" prepend-icon="mdi-image" @click=""></v-list-item>
+                    <v-list-item title="Clipart" prepend-icon="mdi-shape" @click=""></v-list-item>
                     <v-list-item :title="layer.visible ? 'Verstecken' : 'Anzeigen'" prepend-icon="mdi-eye" @click="toggleLayer(index, layer.visible)"></v-list-item>
-                    <v-list-item v-if="index > 0" title="Löschen" prepend-icon="mdi-delete"  @click="removeLayer(index)"></v-list-item>
+                    <v-list-item v-if="ws.layers.length > 1" title="Löschen" prepend-icon="mdi-delete"  @click="removeLayer(index)"></v-list-item>
                 </v-list>
             </v-menu>
         </template>

@@ -42,7 +42,17 @@ function makeShapes() {
 }
 
 function dropShape(fileUrl) {
-
+    // const testImgObj = new Image(500, 400);
+    // testImgObj.src = fileUrl;
+    // var img = new fabric.Image(testImgObj, {
+    //         left: 100,
+    //         top: 100,
+    //         scaleX: 0.5,
+    //         scaleY: 0.5,
+    // });
+    //     ws.canvas.add(img);
+    //     ws.canvas.setActiveObject(img);
+    //     ws.canvas.renderAll();
     fabric.Image.fromURL(fileUrl, (img) => {
         img.set({
             left: 100,
@@ -50,12 +60,9 @@ function dropShape(fileUrl) {
             scaleX: 0.5,
             scaleY: 0.5,
         });
-
         ws.canvas.add(img);
         ws.canvas.setActiveObject(img);
-        ws.currentLayer.strokes.push(img);
-        // ws.canvas.renderAll();
+        ws.canvas.renderAll();
     });
-
 }
 </script>

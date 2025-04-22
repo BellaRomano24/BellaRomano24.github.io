@@ -20,7 +20,7 @@ onMounted(() => {
     ws.canvas = new fabric.Canvas(canvasEl.value, { isDrawingMode: true });
 
     // capture strokes when drawn
-    ws.canvas.on('path:created', (e) => ws.recordStroke(e));
+    ws.canvas.on('path:created', (e) => ws.currentLayer.strokes.push(e.path));
 });
 
 function resizeCanvas() {

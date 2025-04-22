@@ -3,20 +3,25 @@ import { defineStore } from 'pinia'
 export const useWorkspaceStore = defineStore('counter', {
     state: () => ({
         tool: "pencil",
-        layers: ['Layer 0'],
-        currentLayer: 0,
+        layers: [{
+            name: 'Layer 0',
+            strokes: [], //paths
+            visible: true
+        }],
+        cLayIdx: 0, // current layer index
         canvas: null,
-        strokes: [] //Array<Object(path, layer)
+        shapes: []
     }),
     getters: {
         //   doubleCount: (state) => state.count * 2,
+        currentLayer(state) { return this.layers[this.cLayIdx]}
     },
     actions: {
         setTool(tool) {
-            if(this.tool == "text") this.canvas.off("mouse:down", this.enterTextEdit);
+            if(this.tool == "text") this.canvas.off("mouse:down", this.enterTextEdit); // was
             this.tool = tool;
             this.canvas.isDrawingMode = this.tool == "pencil";
-            if(this.tool == "text") this.canvas.on("mouse:down", this.enterTextEdit);
+            if(this.tool == "text") this.canvas.on("mouse:down", this.enterTextEdit); // is
         },
         enterTextEdit(event) {
             const pointer = this.canvas.getPointer(event.e);
@@ -33,23 +38,12 @@ export const useWorkspaceStore = defineStore('counter', {
             text.enterEditing(); 
         },
         addLayer() {
-            this.layers.push('Layer ' + this.layers.length);
-            this.currentLayer = this.layers.length -1;
-        },
-        removeLayer(index) {
-            this.strokes.forEach(e => {
-                if(e.layer === index) {
-                    this.canvas.remove(e.path.path);
-                }
+            this.layers.push({
+                name: 'Layer ' + this.layers.length,
+                visible: true,
+                strokes: []
             });
-            this.strokes = this.strokes.filter(e => e.layer != index); //remove all strokes on this layer
-            this.layers.splice(index, 1); //remove layer
-            if(this.currentLayer === index) {
-                this.currentLayer = this.layers.length - 1;
-            }
-        },
-        recordStroke(path) {
-            this.strokes.push({path, layer: this.currentLayer});
+            this.cLayIdx = this.layers.length -1;
         }
     }
 });

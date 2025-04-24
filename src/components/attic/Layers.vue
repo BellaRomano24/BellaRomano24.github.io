@@ -1,7 +1,7 @@
 <template>
     <v-list-subheader>
         Layers
-        <v-btn size="small" icon variant="text" class="position-absolute right-0 mr-3 mt-n2" @click="ws.addLayer">
+        <v-btn size="small" icon variant="text" class="position-absolute right-0 mr-3 mt-n2" @click="addLayer">
             <v-icon>mdi-plus</v-icon>
             <v-tooltip activator="parent">Add new Layer</v-tooltip>
         </v-btn>
@@ -25,7 +25,6 @@
                     <v-btn icon="mdi-dots-vertical" variant="plain"></v-btn>
                 </template>
                 <v-list>
-                    <v-list-item title="Clipart" prepend-icon="mdi-shape" @click=""></v-list-item>
                     <v-list-item :title="layer.visible ? 'Verstecken' : 'Anzeigen'" prepend-icon="mdi-eye" @click="toggleLayer(index, layer.visible)"></v-list-item>
                     <v-list-item v-if="ws.layers.length > 1" title="Löschen" prepend-icon="mdi-delete"  @click="removeLayer(index)"></v-list-item>
                 </v-list>
@@ -51,7 +50,7 @@ function switchLayer(index) {
 }
 
 function removeLayer(index) {
-    ws.layers[index].strokes.forEach(e => ws.canvas.remove(e));
+    ws.layers[index].strokes.forEach(e => ws.canvas.remove(e) );
     if(ws.cLayIdx === index) {
         ws.cLayIdx = 0;
     }
@@ -62,6 +61,15 @@ function toggleLayer(index, toggle) {
     ws.layers[index].visible = !toggle;
     ws.layers[index].strokes.forEach(path => path.visible = !toggle );
     ws.canvas.renderAll();
+}
+
+function addLayer() {
+    ws.layers.push({
+        name: 'Layer ' + ws.layers.length,
+        visible: true,
+        strokes: []
+    });
+    ws.cLayIdx = ws.layers.length -1;
 }
 </script>
 

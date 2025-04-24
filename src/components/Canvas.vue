@@ -1,6 +1,6 @@
 <template>
     <div class="ma-3">
-        <canvas ref="canvasEl" width="800" height="600"></canvas>
+        <canvas ref="canvasEl" id="canvas-id-el" width="800" height="600"></canvas>
     </div>
 </template>
 
@@ -17,10 +17,16 @@ const ws = useWorkspaceStore();
 
 onMounted(() => {
     resizeCanvas();
-    ws.canvas = new fabric.Canvas(canvasEl.value, { isDrawingMode: true });
+    ws.canvas = markRaw(new fabric.Canvas(canvasEl.value, { 
+        isDrawingMode: true,
+        backgroundColor: 'white',
+        
+    }));
 
     // capture strokes when drawn
-    ws.canvas.on('path:created', (e) => ws.currentLayer.strokes.push(e.path));
+    ws.canvas.on('path:created', (e) => {
+        ws.currentLayer.strokes.push(markRaw(e.path));
+    });
 });
 
 function resizeCanvas() {

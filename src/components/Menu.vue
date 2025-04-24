@@ -1,12 +1,10 @@
 <template>
     <v-app-bar density="compact">
-        <v-toolbar-title>Live Draw</v-toolbar-title>
-
-        
-        <div class="pr-12">
-            <!-- <v-icon>mdi-marker</v-icon> -->
-             <!-- <v-icon @click="undo" title="Undo">mdi-arrow-u-left-top</v-icon> -->
-        </div>
+        <v-toolbar-title>
+            Live Draw
+            
+            <LiveRecorder v-if="ws.canvas"></LiveRecorder>        
+        </v-toolbar-title>
 
         <v-btn disabled><v-icon class="mr-2">mdi-floppy</v-icon> Save</v-btn>
         <v-btn @click="save"><v-icon class="mr-2">mdi-export</v-icon> Export</v-btn>
@@ -15,6 +13,7 @@
 
 <script setup>
 import { useWorkspaceStore } from '@/stores/workspace';
+import LiveRecorder from './attic/LiveRecorder.vue';
 
 const ws = useWorkspaceStore();
 

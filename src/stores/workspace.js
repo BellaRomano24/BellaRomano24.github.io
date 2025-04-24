@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useWorkspaceStore = defineStore('counter', {
+export const useWorkspaceStore = defineStore('workspace', {
     state: () => ({
         tool: "pencil",
         layers: [{
@@ -36,14 +36,6 @@ export const useWorkspaceStore = defineStore('counter', {
 
             this.canvas.add(text).setActiveObject(text);
             text.enterEditing(); 
-        },
-        addLayer() {
-            this.layers.push({
-                name: 'Layer ' + this.layers.length,
-                visible: true,
-                strokes: []
-            });
-            this.cLayIdx = this.layers.length -1;
         }
     }
 });

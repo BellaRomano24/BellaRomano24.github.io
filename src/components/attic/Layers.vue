@@ -20,9 +20,9 @@
             </v-col>
         </v-row>
         <template #append>
-            <v-menu activator="parent">
-                <template v-slot:activator="{ attrs, on }">
-                    <v-btn icon="mdi-dots-vertical" variant="plain"></v-btn>
+            <v-menu>
+                <template v-slot:activator="{ props }">
+                    <v-btn v-bind="props" icon="mdi-dots-vertical" variant="plain"></v-btn>
                 </template>
                 <v-list>
                     <v-list-item :title="layer.visible ? 'Verstecken' : 'Anzeigen'" prepend-icon="mdi-eye" @click="toggleLayer(index, layer.visible)"></v-list-item>

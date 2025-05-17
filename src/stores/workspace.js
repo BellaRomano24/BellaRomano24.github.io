@@ -33,6 +33,7 @@ export const useWorkspaceStore = defineStore('workspace', {
                 fill: this.canvas.freeDrawingBrush.color,
                 editable: true
             });
+            this.currentLayer.strokes.push(text);
 
             this.canvas.add(text).setActiveObject(text);
             text.enterEditing(); 

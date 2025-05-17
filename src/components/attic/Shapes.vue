@@ -49,6 +49,7 @@ function dropShape(fileUrl) {
             scaleY: 0.5,
         });
         ws.canvas.add(img);
+        ws.currentLayer.strokes.push(img);
         ws.canvas.setActiveObject(img);
     });
 }
